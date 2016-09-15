@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('usersController', function ($scope){
+      $scope.user;
+      $scope.users = [{"fname":"billy","lname":"fournier","age":"34"}];
+      $scope.addUser = function(){
+        $scope.users.push($scope.newUser);
+        $scope.newUser = null;
+      };
+      $scope.remove = function(index){
+        console.log(index);
+        $scope.users.splice(index,1);
+      };
+    });
+  </script>
+
+  <style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  </style>
+</head>
+<body ng-app='myApp'>
+  <br>
+  <div ng-controller='usersController'>
+    {{user}}
+    <form>
+      <p>First Name: <input type="text" ng-model='newUser.fname'></p>
+      <p>Last Name: <input type="text" ng-model='newUser.lname'></p>
+      <p>
+        Age: <input type="text" ng-model='newUser.age'>
+        <button ng-click='addUser()'>Create User</button>
+      </p>
+
+    </form>
+    <table>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+      <p>{{users}}</p>
+      <p ng-repeat='x in users'></p>
+      <tr ng-repeat='x in users track by $index'>
+        <td>{{x.fname}}</td>
+        <td>{{x.lname}}</td>
+        <td>{{x.age}}</td>
+        <td><button ng-click='remove($index)'>Delete User</button></td>
+      </tr>
+    </table> <!-- end table -->
+
+  </div>
+</body>
+</html>
