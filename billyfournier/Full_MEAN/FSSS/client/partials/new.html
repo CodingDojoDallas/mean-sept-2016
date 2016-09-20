@@ -1,0 +1,9 @@
+<!-- You will attach an ng-model and an ng-submit to your forms (but might want to wait until the next tab, when you have your controllers and factory) -->
+
+<form ng-controller='newController as NC'>
+  <!-- Appropriate inputs here! -->
+  First name <input type="text" ng-model='newUser.fname'>
+  Last name <input type="text" ng-model='newUser.lname'>
+  <button ng-click='NC.create(newUser)'>Create</button>
+  <a href="#/"><button>Home</button></a>
+</form>
