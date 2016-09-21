@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+<head>
+	<meta charset="UTF-8">
+	<title>Assignment II Controller and Directives</title>
+	<script src="./bower_components/angular/angular.min.js"></script>
+	<script>
+		var app = angular.module('app', []);
+		app.controller('divController', ['$scope', '$log', function($scope, $log){
+			$scope.food = [
+				{name: 'Pizza'},
+				{name: 'BBQ'},
+				{name: 'Fries'},
+				{name: 'Salad'},
+				{name: 'Steak'},
+			];
+			$scope.addFood = function(){
+				$scope.food.push($scope.newFood);
+				$scope.newFood = {};
+			}
+			$log.info($scope);
+		}]);
+	</script>
+</head>
+<body>
+	<div ng-controller="divController">
+		
+		<form>
+			Favorite Food <input type='text' ng-model='newFood.name'>
+			<input type='submit' value='Add Food' ng-click='addFood()'>
+		</form>
+		<span>Currently typing:</span> <span ng-bind="newFood.name"></span>
+		<br>
+		<br>
+		<br>
+		<div class="foods">
+			<input ng-model="filterText" placeholder="filter">
+			<ul>
+				<li ng-repeat="food in food | filter:filterText">{{ food.name }}</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

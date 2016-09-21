@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title>Assignment V Products with a Factory</title>
+	<script src='bower_components/angular/angular.js'></script>
+	<script type='text/javascript'>
+		var app = angular.module('app', []);
+		app.factory('productFactory', function(){
+			var factory = {};
+			var products = [
+				{name: 'Keyboard', price: '149.99'},
+				{name: 'Mouse', price: '59.99'},
+				{name: 'Basketball', price: '59.99'}
+			];
+			factory.index = function(callback){
+				callback(products)
+			}
+			factory.create = function(product, callback){
+				if(product.price && Number(parseFloat(product.price))==product.price){
+					products.push(product);
+					callback(products);
+				}
+			}
+			factory.delete = function(id, callback){
+				products.splice(id, 1);
+				callback(products);
+			}
+			// factory.getProducts = function(callback){
+			// 	callback(products);
+			// }
+			return factory;
+		})
+		app.controller('productsController', ['$scope', 'productFactory', '$log', function($scope, productFactory, $log){
+			function setProducts(data){
+				$scope.products = data;
+				$scope.product = {};
+			}
+			$scope.product = {};
+			$scope.products = [];
+			$scope.index = function(){
+				productFactory.index(setProducts);
+			}
+			$scope.index();
+			$log.info($scope)
+			//
+			$scope.create = function(){
+				productFactory.create($scope.product, setProducts);
+			}
+			$scope.delete = function(id){
+				productFactory.delete(id, setProducts);
+			}
+			// productFactory.getProducts(function(data){
+			// 	$scope.products = data;
+			// });
+		}])
+	</script>
+</head>
+<body ng-app='app'>
+		<div ng-controller='productsController as productsCtrl'>
+
+			<form ng-submit='create()'>
+				Product Name <input type='text' ng-model='product.name'><br>
+				Product Price <input type='number' ng-model='product.price'><br>
+				<input type='submit' value='Add Product'>
+			</form>
+
+			Search Products: <input type="text" ng-model="filter_products">
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Actions</th>
+				</tr>
+				<tr ng-repeat="product in products | filter:filter_products">
+					<td>{{ product.name }}</td>
+					<td>{{ product.price | currency:"USD $" }}</td>
+					<td><button ng-click="delete($index)">Delete</button></td>
+				</tr>
+			</table>
+		</div>
+</body>
+</html>

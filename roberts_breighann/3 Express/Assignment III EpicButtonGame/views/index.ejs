@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment III: Epic Button Game</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+
+    <<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script>
+      $(function(){
+        var socket = io.connect();
+        $(window).on('load', function(){
+          console.log('test');
+          socket.emit('page_load');
+        });
+        $('#number').click(function(){
+          socket.emit('button_pushed');
+          console.log('sendinding emit to server');
+        });
+        $('#reset').click(function(){
+          socket.emit('reset');
+        })
+        socket.on('count_return', function(count){
+          $('#count').text(count.count);
+        });
+        socket.on('reset_return', function(new_count){
+          $('#count').text(new_count.count);
+        });
+        socket.on('page_return', function(count){
+          console.log(count);
+          $('#count').text(count.count);
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row text-center">
+        <h1>The button has been pushed <span id='count'></span> time(s)</h1>
+      </div>
+      <div class="row text-center">
+        Push the button to update the count!
+      </div>
+      <div class="row text-center">
+        <form action="" id='number'>
+          <button class='btn btn-primary btn-lg text-center'>Push the EPIC button</button>
+        </form>
+      </div>
+      <br>
+      <div class="row text-center">
+        <form action="" id='reset'>
+          <button class='btn btn-danger btn-lg'>Reset count</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
