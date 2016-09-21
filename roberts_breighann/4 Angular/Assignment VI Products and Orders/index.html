@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Assignment VI Products &amp; Orders</title>
+	<script src='bower_components/angular/angular.js'> </script>
+	<script>
+		var app = angular.module('angApp', []);
+		app.factory("productFactory", function(){
+			var count = 1;
+			var products = {};
+			var factory = {};
+			factory.getProducts = function() { return products;};
+			factory.addProduct = function(newProduct){
+				newProduct.quantAvail = 50;
+				products[count] = newProduct;
+				count += 1;
+			}
+			factory.removeProduct = function(key){
+				delete products[key];
+			}
+			factory.quant = function(key) {
+				if (products[key].quantAvail >= 1) {
+					products[key].quantAvail -=1;
+				}				
+			}
+			return factory;
+		});
+		app.controller('productController', function($scope,productFactory) {
+			$scope.products = productFactory.getProducts();
+			$scope.addProduct = function() { 
+				productFactory.addProduct($scope.newProduct);
+				$scope.newProduct = {};	
+			};
+			$scope.removeProduct = function(key) { productFactory.removeProduct(key);	};
+		});
+		app.controller('orderController', function($scope,productFactory) {
+			$scope.products = productFactory.getProducts();
+			$scope.buy = function(key) {productFactory.quant(key);
+			};
+		});
+		
+	</script>
+</head>
+
+<body>
+	<div ng-controller="productController">
+		<form>
+			<label>Product Name<input type="text" ng-model='newProduct.name'></label>
+			<label>Price:<input type="number" ng-model='newProduct.price'></label>
+			<input type="submit" value='Add Product' ng-click='addProduct()'>
+		</form>
+
+		<table class='table'>
+			<tr>
+				<th>Product name </th>
+				<th>Price</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="(key,product) in products">
+				<td>{{product.name}}</td>
+				<td> {{product.price | currency}} </td>
+				<td><input type="submit" value='Delete Product' ng-click="removeProduct(key)"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="order" ng-controller="orderController">	
+		<table class='table'>
+			<tr>
+				<th>Product Name </th>
+				<th>Price</th>
+				<th>Quantity Available</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="(key,product) in products">
+				<td>{{product.name}}</td>
+				<td> {{product.price | currency}} </td>
+				<td> {{product.quantAvail}} </td>
+				<td><input type="submit" value='Buy' ng-click="buy(key)"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

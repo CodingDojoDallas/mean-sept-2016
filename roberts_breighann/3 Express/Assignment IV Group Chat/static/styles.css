@@ -1,0 +1,21 @@
+* {
+  padding: 0px; margin: 0px;
+}
+
+.chatbox {
+  border: solid 1px grey;
+  height: 500px;
+  overflow: auto;
+}
+
+.usersbox {
+  border: solid 1px grey;
+  height: 500px;
+}
+
+.userbox {
+  background: lightgreen;
+  border: solid 4px silver;
+  font-weight: bold;
+  text-align: center;
+}
