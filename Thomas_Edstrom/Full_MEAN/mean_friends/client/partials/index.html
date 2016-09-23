@@ -1,0 +1,24 @@
+<h1>Friends</h1>
+
+
+<label for="">Filter by Birthday!</label>
+<input type="date" ng-model="filter_friends">
+
+<hr>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Show</th>
+		<th>Update</th>
+		<th>Delete</th>
+	</tr>
+	<tr ng-repeat="friend in friends | filter:filter_friends track by $index">
+		<td>{{ friend.first_name}} {{ friend.last_name}}</td>
+		<td><a href="">show</a></td>
+		<td><a href="#/edit/{{ $index }}">edit</a></td>
+		<td><a href="" ng-click="delete($index)">delete</a></td>
+	</tr>
+</table>
+
+<a href="#/new" class="btn">New Friend</a>

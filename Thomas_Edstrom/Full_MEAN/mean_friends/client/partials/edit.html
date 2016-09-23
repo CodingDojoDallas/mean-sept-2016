@@ -1,0 +1,16 @@
+<!-- You will attach an ng-model and an ng-submit to your forms (but might want to wait until the next tab, when you have your controllers and factory) -->
+<h1>EDIT FORM</h1>
+<form>
+	<input type="text" name="name" ng-model="friend.first_name" value="{{ friend.first_name }}">
+	<label for="name">First Name</label><br>
+	
+	<input type="text" name="name" ng-model="friend.last_name">
+	<label for="name">Last Name</label><br>
+	
+	<input type="date" name="name" ng-model="friend.birthdate">
+	<label for="name">Birth Day</label><br>
+
+	<input type="submit" value="Edit Friend">
+</form>
+
+{{ friend }}
