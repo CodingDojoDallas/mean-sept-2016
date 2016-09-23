@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-horizontal">
+					<label class="control-label col-sm-2" for="date-filter">Filter by Birthday</label>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+							<input type="text" class="form-control" id="date-filter" ng-model="iC.search.birthday">
+						</div>
+					</div>
+				</form>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="col-xs-4">Name</th>
+						<th class="col-xs-4">Birthday</th>
+						<th class="col-xs-4" colspan="3">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="friend in friends | filter:iC.search:strict">
+						<td>{{ friend.first_name }} {{ friend.last_name }}</td>
+						<td>{{ friend.birthday | date:'yyyy-MM-dd' }}</td>
+						<td><a class="text-info" href="#/show/{{ friend._id }}">Show</a></td>
+						<td><a class="text-warning" href="#/edit/{{ friend._id }}">Edit</a></td>
+						<td><a class="text-danger" href="#/" ng-click="delete(friend._id)">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

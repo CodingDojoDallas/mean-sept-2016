@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-md-offset-2 col-md-8 col-sm-12">
+		<ul class="list-group">
+			<li class="list-group-item"><div class="row"><span class="col-xs-3">First Name:</span><span class="col-xs-9">{{ friend.first_name }}</span></div></li>
+			<li class="list-group-item"><div class="row"><span class="col-xs-3">Last Name:</span><span class="col-xs-9">{{ friend.last_name }}</span></div></li>
+			<li class="list-group-item"><div class="row"><span class="col-xs-3">Birthday:</span><span class="col-xs-9">{{ friend.birthday | date:'yyyy-MM-dd' }}</li>
+			<li class="list-group-item"><div class="row"><span class="col-xs-3">Added On:</span><span class="col-xs-9">{{ friend.createdAt | date:'yyyy-MM-dd' }}</span></div></li>
+			<li class="list-group-item"><div class="row"><span class="col-xs-3">Actions:</span><span class="col-xs-9"><a class="text-info" href="#/">Home</a>,&nbsp;&nbsp;<a class="text-warning" href="#/edit/{{ friend._id }}">Edit</a>,&nbsp;&nbsp;<a class="text-danger" href="#/" ng-click="(delete(friend._id))">Delete</a></span></div></li>
+		</ul>
+	</div>
+</div>
