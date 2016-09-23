@@ -1,0 +1,33 @@
+<html ng-app='myApp'>
+  <head>
+    <title></title>
+
+    <script src='/angular/angular.js'></script>
+    <script src='angular-route/angular-route.js'></script>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+
+    <script src="assets/app.js" charset="utf-8"></script>
+    <script src="assets/controllers/newController.js" charset="utf-8"></script>
+    <script src="assets/controllers/editController.js" charset="utf-8"></script>
+    <script src="assets/factories/friendFactory.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+
+//    Controllers
+      myApp.controller('FriendsController', function ($scope, $location, $routeParams, friendsFactory) {
+        var self = this;
+        self.new = function($scope){
+          console.log('new() is at the controller');
+          $location.path('/new')
+        };
+      });
+
+    </script>
+
+</head>
+  <body>
+    <div class="container">
+      <div ng-view=''></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<div class="col-sm-8" ng-controller='newController as NC'>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Show</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='x in NC.friends track by $index'>
+        <td>{{x.fname}} {{x.lname}}</td>
+        <td><a href="#/show/{{x._id}}">show</a></td>
+        <td><a href="#/edit/{{$index}}">edit</a></td>
+        <td><a href='#/'><button ng-click='NC.delete(x._id)'>delete</button></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-sm-4">
+  <div class="row">
+    <input type="text" placeholder='Filter: Birthday!'>
+  </div>
+  <div class="row" ng-controller='FriendsController as FC'>
+    <button ng-click='FC.new()'>New Friend</button>
+  </div>
+</div>
