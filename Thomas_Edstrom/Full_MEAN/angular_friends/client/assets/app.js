@@ -20,3 +20,11 @@ angular.module('app', ['ngRoute'])
 		redirectTo: '/'
 	});
 });
+
+
+
+var isDog = function(animal){
+	return animal.species === 'dogs'
+}
+
+var dogs = animals.filter(isDog)
