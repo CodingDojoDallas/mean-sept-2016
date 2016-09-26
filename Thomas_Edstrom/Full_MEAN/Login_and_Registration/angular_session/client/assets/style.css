@@ -1,0 +1,59 @@
+*{
+	font-family: sans-serif;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+th {
+    background-color: gray;
+    color: white;
+}
+
+.panel{
+	border: 3px solid black;
+	display: inline-block;
+	margin: 20px;
+	padding: 2em;
+	position: relative;
+}
+.panelTitle{
+	position: absolute;
+	top: -1.5em;
+	left: 1em;
+	background: white;
+	display: inline-block;
+
+}
+
+.btn{
+	display: inline-block;
+	margin: 25px;
+	text-decoration: none;
+	color: black;
+	border-radius: 0px;
+	border: 3px solid black;
+	box-shadow: 4px 4px 0px black;
+	background: white;
+	font-size: 1em;
+	padding: 4px;
+}
+input{
+	border: 3px solid black;
+	margin: 5px;
+}
+.error{
+	color: red;
+	background: pink;
+	border: 3px solid red;
+	border-radius: 5px;
+	padding: 4px;
+	line-height: 2.5em;
+}
