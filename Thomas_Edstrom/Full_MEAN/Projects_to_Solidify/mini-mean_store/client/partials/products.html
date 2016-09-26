@@ -1,0 +1,35 @@
+<h1 class="fw">products</h1>
+<hr class="fw">
+<div class="leftnav">
+	<form>
+		<input type="text" placeholder="search...">
+		<input type="submit" value="Filter" class="btn">
+	</form>
+
+	<h3><u>Add a new Product</u></h3>
+	<form ng-submit="create(newProduct)">
+		<label for="name">Name:</label><br>
+		<input type="text" ng-model="newProduct.product"><br>
+
+		<label for="url">Image (url):</label><br>
+		<input type="text" ng-model="newProduct.image"><br>
+
+		<label for="description">Description:</label><br>
+		<textarea name="description" cols="20" rows="5" ng-model="newProduct.description"></textarea><br>
+
+		<label for="qty">Initial Quantity:</label><br>
+		<input type="number" ng-model="newProduct.qty"><br>
+
+		<input type="submit" value="Create" class="btn blue">
+	</form>
+</div>
+
+<div id="productListing">
+	<div ng-repeat="product in products" class="productBox">
+		<div class="image">
+			(image)
+		</div>
+		<p>{{ product.product }}</p>
+		<p>({{ product.qty }} left)</p>
+	</div>
+</div>

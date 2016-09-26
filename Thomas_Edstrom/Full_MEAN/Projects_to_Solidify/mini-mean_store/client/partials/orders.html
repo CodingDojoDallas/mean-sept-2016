@@ -1,0 +1,45 @@
+<h1 class="fw">Orders</h1>
+<hr class="fw">
+
+<div>
+	<h4><u>Add a new order</u></h4>
+	
+	<div ng-if="error">
+		<span class="error">{{ error }}</span>
+	</div>
+
+	<form ng-submit="create(newOrder)">
+		<label for="name">Customer</label>
+		<select ng-model="newOrder.customer">
+			<option ng-repeat="customer in customers" value="{{ $index }}">{{ customer.name }}</option>
+		</select>
+
+		<label for="qty">Order</label>
+		<input type="number" ng-model="newOrder.qty">
+
+		<select ng-model="newOrder.product">
+			<option ng-repeat="product in products" value="{{ $index }}">{{ product.product }}</option>
+		</select>
+
+		<input type="submit" value="Order" class="btn blue">
+	</form>
+</div>
+
+
+<div class="fw">
+	<input type="text" placeholder="filter..." ng-model="filter_orders">
+	<table>
+		<tr>
+			<th>Customer Name</th>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Date</th>
+		</tr>
+		<tr ng-repeat="order in orders | filter:filter_orders">
+			<td>{{ order.customer.name }}</td>
+			<td>{{ order.product.product }}</td>
+			<td>{{ order.qty }}</td>
+			<td>{{ order.created_at | date: shortDate }}</td>
+		</tr>
+	</table>
+</div>
