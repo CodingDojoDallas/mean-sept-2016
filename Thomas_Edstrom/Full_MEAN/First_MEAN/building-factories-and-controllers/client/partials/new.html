@@ -1,0 +1,13 @@
+<!-- You will attach an ng-model and an ng-submit to your forms (but might want to wait until the next tab, when you have your controllers and factory) -->
+<h1>NEW FORM</h1>
+<form ng-submit="create(friend)">
+	<label for="name">Name</label>
+	<input type="text" name="name" ng-model="friend.name">
+	<input type="submit" value="Create user">
+</form>
+
+<hr>
+
+<ol>
+	<li ng-repeat="friend in friends.data">{{ friend.name }}</li>
+</ol>
