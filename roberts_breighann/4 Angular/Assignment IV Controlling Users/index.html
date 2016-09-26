@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>Assignment IV Controlling Users</title>
+	<script src='bower_components/angular/angular.js'></script>
+	<script type='text/javascript'>
+		var app = angular.module('app', []);
+		app.controller('usersController', function (){
+			this.users = [
+					{first_name:'John', last_name:'Doe', language:'Ruby'},
+					{first_name:'Jessie', last_name:'Doe', language:'Ruby'},
+					{first_name:'Johanna', last_name:'Doe', language:'Ruby'},
+					{first_name:'Joy', last_name:'Doe', language:'Ruby'},
+					{first_name:'Mary', last_name:'Doe', language:'Ruby'},
+					{first_name:'Peter', last_name:'Doe', language:'Ruby'},
+					{first_name:'Sebastian', last_name:'Doe', language:'Ruby'},
+					{first_name:'Erika', last_name:'Doe', language:'Ruby'},
+					{first_name:'Patrick', last_name:'Doe', language:'Ruby'},
+					{first_name:'Samantha', last_name:'Doe', language:'Ruby'},
+			];
+			this.addUser = function(){
+				this.users.push(this.newUser);
+				this.newUser = {};
+			}
+			this.deleteUser = function(user){
+				var index = this.users.findIndex(x => x.first_name == user);
+				this.users.splice(index, 1);
+			}
+		})
+	</script>
+</head>
+<body ng-app='app'>
+		<div ng-controller='usersController as usersCtrl'>
+
+			<form>
+				First Name <input type='text' ng-model='usersCtrl.newUser.first_name'><br>
+				Last Name <input type='text' ng-model='usersCtrl.newUser.last_name'><br>
+				Language <input type='text' ng-model='usersCtrl.newUser.language'><br>
+				<input type='submit' value='Create User' ng-click='usersCtrl.addUser()'>
+			</form>
+
+			Search Users: <input type="text" ng-model="filter_users">
+			<table>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Favorite Language</th>
+					<th>Actions</th>
+				</tr>
+				<tr ng-repeat="user in usersCtrl.users | filter:filter_users">
+					<td>{{ user.first_name }}</td>
+					<td>{{ user.last_name }}</td>
+					<td>{{ user.language }}</td>
+					<td><button ng-click="usersCtrl.deleteUser(user.first_name)">Delete User</button></td>
+				</tr>
+			</table>
+		</div>
+</body>
+</html>

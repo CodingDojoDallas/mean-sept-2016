@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Survey Form</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="submit">
+			<h3>Submitted Information</h3>
+			<p class="half">Name:</p>
+			<p class="half"><%= info.name %></p>
+			<p class="half">Dojo Location:</p>
+			<p class="half"><%= info.location %></p>
+			<p class="half">Favorite Language:</p>
+			<p class="half"><%= info.language %></p>
+			<p class="half">Comment:</p>
+			<p class="half"><%= info.comment %></p>
+			<div class="align-right">
+				<a href="/">Go Back</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

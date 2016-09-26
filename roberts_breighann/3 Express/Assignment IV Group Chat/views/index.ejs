@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment IV: Group Chat</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script>
+
+      $(function(){
+        var user = prompt("Please enter your name");
+        var socket = io.connect();
+        $(window).on('load', function(){
+          var users_string = '';
+          if(user){
+            socket.emit('user_joined', {newuser: user});
+            socket.emit('retrieve_messages');
+          }
+          socket.on('get_users', function(res){
+            for (usr in res.users){
+              users_string += '<div class="row userbox">'+res.users[usr].newuser+ '</div>';
+              $('.usersbox').html(users_string);
+            }
+          });
+          socket.on('return_messages',function(res){
+            console.log(res);
+            var new_string = '';
+            for (index in res.messages){
+              console.log(res.messages[index]);
+              new_string += '<p><span>' + res.messages[index].name + ' says:</span> '+ res.messages[index].chat + '</p>'
+            }
+            $('.chatbox').append(new_string);
+          });
+        });
+        $('#chat').submit(function(){
+          console.log(typeof(user) + ' ' + user + ' ' + user.length);
+          socket.emit('new_chat', {name: user, chat: $('#chat_value').val()});
+          $('#chat')[0].reset();
+        });
+        socket.on('update_chat', function(res){
+          console.log(res.chat);
+          var new_string = '<p><span>' + res.name + ' says:</span> '+ res.chat + '</p>'
+          $('.chatbox').append(new_string);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="col-sm-12 chatbox">
+
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="col-sm-12 usersbox">
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <form id='chat'>
+            <input type="text" id='chat_value'>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
