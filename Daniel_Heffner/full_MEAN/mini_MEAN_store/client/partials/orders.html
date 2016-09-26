@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-md-6">
+		<form class="form-horizontal" ng-submit="oC.create()">
+			<legend>Add a new order</legend>
+			<div class="form-group">
+				<label for="customer" class="col-sm-3 control-label text-left">Customer</label>
+				<div class="col-sm-9">
+					<select class="form-control" ng-model="oC.newOrder.customer" ng-options="customer.name for customer in oC.customers"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="quantity" class="col-sm-2 control-label">Order</label>
+				<div class="col-sm-3">
+					<input type="number" min="0" max="{{ oC.newOrder.product.quantity }}" class="form-control" ng-model="oC.newOrder.quantity">
+				</div>
+				<div class="col-sm-7">
+					<select class="form-control" ng-model="oC.newOrder.product" ng-options="product.name for product in oC.products"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-9 col-sm-3">
+					<input type="submit" class="btn btn-success btn-block" value="Order">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<h4 class="text-danger" ng-if="oC.formErrors.customer || oC.formErrors.quantity || oC.formErrors.product">Errors:</h4>
+		<p class="text-danger" ng-bind="oC.formErrors.customer"></p>
+		<p class="text-danger" ng-bind="oC.formErrors.quantity"></p>
+		<p class="text-danger" ng-bind="oC.formErrors.product"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-offset-9 col-sm-3">
+		<div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+			<input type="text" ng-model="oC.search" class="form-control">
+		</div>
+	</div>
+</div>
+<div class="row">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Customer Name</th>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="order in oC.orders | filter:oC.search">
+				<td>{{ order.customer }}</td>
+				<td>{{ order.product }}</td>
+				<td>{{ order.quantity }}</td>
+				<td>{{ order.createdAt | date:'MMMM d, yyyy' }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
