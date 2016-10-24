@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Mini MEAN Store</title>
+	<!-- load up angular and angular routes -->
+	<script src="angular/angular.min.js"></script>
+	<script src="angular-route/angular-route.min.js"></script>
+	<!-- load app.js and all factories and controllers -->
+	<script src="assets/app.js"></script>
+	<script src="assets/factories/customersFactory.js"></script>
+	<script src="assets/factories/ordersFactory.js"></script>
+	<script src="assets/factories/productsFactory.js"></script>
+	<script src="assets/controllers/customersController.js"></script>
+	<script src="assets/controllers/ordersController.js"></script>
+	<script src="assets/controllers/productsController.js"></script>
+	<script src="assets/controllers/dashboardController.js"></script>
+	<!-- CDNs for bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body ng-app="miniStoreApp">  <!-- Declare the angular app -->
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<h4 class="navbar-text">Mini MEAN Store</h4>
+			</div>
+			<div class="collapse-navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#/">Dashboard</a></li>
+					<li><a href="#/products">Products</a></li>
+					<li><a href="#/orders">Orders</a></li>
+					<li><a href="#/customers">Customers</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div ng-view></div> <!-- partials will display here -->
+	</div>
+</body>
+</html>
